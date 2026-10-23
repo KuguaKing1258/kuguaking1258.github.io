@@ -13,25 +13,41 @@ body{
   color:#fff;
 }
 
-/* 首屏头部 */
 .hero{
   min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  padding:40px 20px 28px;
+  padding:0 20px;
   text-align:center;
+  position:relative;
+}
+/* 包裹头像+标题+翻转文字+按钮，这一坨紧凑容器 */
+.wrap-group{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px; /* 统一收紧内部间距，全部挨近 */
 }
 
-/* 头像光环 + 纯黑头像 */
+/* 头像 加大 + 炫酷脉动光环 */
 .avatar-wrap{
-  width:160px;
-  height:160px;
-  margin-bottom:42px;
+  width:190px;
+  height:190px;
   border-radius:50%;
-  background: linear-gradient(135deg,#b078ff,#58b8ff);
-  padding:4px;
+  background: linear-gradient(135deg,#b078ff,#58b8ff,#ff68b8,#b078ff);
+  padding:5px;
+  animation: avatarGlow 3s ease-in-out infinite alternate;
+  box-shadow: 0 0 25px #b078ff77, 0 0 50px #58b8ff44;
+}
+@keyframes avatarGlow {
+  0% {
+    box-shadow: 0 0 22px #b078ff70, 0 0 45px #58b8ff38;
+  }
+  100% {
+    box-shadow: 0 0 35px #b078ff99, 0 0 70px #ff68b855;
+  }
 }
 .avatar{
   width:100%;
@@ -42,19 +58,16 @@ body{
 
 .main-title{
   font-size:52px;
-  margin-bottom:22px;
   text-shadow: 0 2px 14px #00000060;
 }
 
-/* 翻页式文字容器 */
 .slide-text-box{
   height:40px;
-  margin-bottom:34px;
   display:flex;
   justify-content:center;
   align-items:center;
   perspective: 1200px;
-  overflow:hidden;
+  position:relative;
 }
 .flip-word{
   position:absolute;
@@ -65,14 +78,11 @@ body{
   will-change: transform, opacity;
 }
 
-/* 导航按钮组 */
 .btn-group{
   display:flex;
   gap:16px;
   justify-content:center;
   flex-wrap:wrap;
-  margin-bottom:auto;
-  margin-top:18px;
 }
 .btn{
   padding:12px 28px;
@@ -96,23 +106,24 @@ body{
   transform:scale(1.04);
 }
 
-/* 底部简介贴近首屏底边 */
+/* 底部描述，单独放，贴底边，不动 */
 .desc-text{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
   font-size:18px;
   color:#e2e8f0;
   line-height:1.8;
   max-width:640px;
-  margin-top:auto;
-  padding-top:18px;
+  text-align:center;
 }
 
-/* 下方内容区 */
 .content{
   max-width:900px;
   margin:0 auto;
   padding:80px 20px 40px;
 }
-
 h2{
   font-size:32px;
   margin:40px 0 18px;
@@ -160,7 +171,6 @@ h2{
   text-decoration: underline;
 }
 
-/* 悬浮Tooltip */
 .tooltip-wrap{
   position: relative;
 }
@@ -205,7 +215,6 @@ h2{
   font-size:15px;
 }
 
-/* 底部布局 */
 .footer-bar{
   max-width:900px;
   margin:80px auto 0;
@@ -232,19 +241,13 @@ h2{
   color:#e2e8f0;
 }
 
-/* 移动端修复 */
 @media (max-width:768px){
-  .hero{
-    padding:30px 16px 22px;
-  }
   .avatar-wrap{
-    width:130px;
-    height:130px;
-    margin-bottom:30px;
+    width:150px;
+    height:150px;
   }
   .main-title{
     font-size:36px;
-    margin-bottom:18px;
   }
   .flip-word{
     font-size:18px;
@@ -255,6 +258,7 @@ h2{
   }
   .desc-text{
     font-size:16px;
+    bottom:24px;
   }
   h2{
     font-size:28px;
@@ -274,20 +278,21 @@ h2{
 <body>
 
 <section class="hero">
-  <div class="avatar-wrap">
-    <div class="avatar"></div>
+  <!-- 这一坨：头像+标题+翻转文字+按钮，紧凑打包，挨在一起 -->
+  <div class="wrap-group">
+    <div class="avatar-wrap">
+      <div class="avatar"></div>
+    </div>
+    <h1 class="main-title">你好，我是费奥德罗</h1>
+    <div class="slide-text-box" id="wordBox"></div>
+    <div class="btn-group">
+      <a href="#contact" class="btn btn-purple">联系我</a>
+      <a href="#skill" class="btn btn-outline">我的技能</a>
+      <a href="#hobby" class="btn btn-outline">兴趣爱好</a>
+    </div>
   </div>
 
-  <h1 class="main-title">你好，我是费奥德罗</h1>
-
-  <div class="slide-text-box" id="wordBox"></div>
-
-  <div class="btn-group">
-    <a href="#contact" class="btn btn-purple">联系我</a>
-    <a href="#skill" class="btn btn-outline">我的技能</a>
-    <a href="#hobby" class="btn btn-outline">兴趣爱好</a>
-  </div>
-
+  <!-- 单独放在底部，位置固定不动 -->
   <p class="desc-text">
     嗨，你好，很高兴认识你，这里是我的个人网站。<br>
     你可以通过它了解我或是找到我。
@@ -295,7 +300,6 @@ h2{
 </section>
 
 <main class="content">
-
   <h2 id="hobby">兴趣爱好</h2>
   <div class="glass">
     <div class="tag-row">
@@ -372,25 +376,22 @@ function sleep(ms){
 
 async function playFlipWord(){
   box.innerHTML = "";
-
   const current = document.createElement("span");
   current.className = "flip-word";
   current.innerText = wordList[currentIndex];
   box.appendChild(current);
 
-  // 当前词向上翻走，像手心翻手背
   current.style.transform = "rotateX(0deg)";
   current.style.opacity = "1";
-
   await sleep(3800);
 
+  // 旧词向上翻走
   current.style.transition = "transform 0.9s ease-in, opacity 0.7s ease-in";
   current.style.transform = "rotateX(-180deg)";
   current.style.opacity = "0";
+  await sleep(450);
 
-  await sleep(500);
-
-  // 新词从下往上翻出来
+  // 新词从下翻上来
   const nextIndex = (currentIndex + 1) % wordList.length;
   const next = document.createElement("span");
   next.className = "flip-word";
@@ -406,13 +407,10 @@ async function playFlipWord(){
   });
 
   await sleep(700);
-
   currentIndex = nextIndex;
   playFlipWord();
 }
-
 playFlipWord();
 </script>
-
 </body>
 </html>

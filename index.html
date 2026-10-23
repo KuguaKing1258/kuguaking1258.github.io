@@ -8,7 +8,6 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui, sans-serif;}
 body{
   min-height:100vh;
-  /* 星空深海渐变背景 */
   background: linear-gradient(135deg, #050a1f, #0b1736, #10122e);
   background-attachment: fixed;
   padding:40px 20px;
@@ -16,6 +15,20 @@ body{
 .container{
   max-width:900px;
   margin:0 auto;
+}
+.title-main{
+  text-align:center;
+  color:#ffffff;
+  font-size:42px;
+  margin:20px 0 16px;
+  text-shadow: 0 2px 10px #00000060;
+}
+.desc-text{
+  text-align:center;
+  color:#e2e8f0;
+  font-size:18px;
+  margin-bottom:40px;
+  line-height:1.7;
 }
 h2{
   text-align:center;
@@ -37,6 +50,7 @@ h2{
   display:flex;
   gap:12px;
   flex-wrap:wrap;
+  justify-content:center;
 }
 .tag{
   padding:9px 18px;
@@ -63,10 +77,18 @@ h2{
 .link-item a:hover{
   text-decoration: underline;
 }
+.tip{
+  font-size:12px;
+  color:#cccccc;
+  margin-left:6px;
+}
 </style>
 </head>
 <body>
 <div class="container">
+  <h1 class="title-main">你好，我是KuguaKing</h1>
+  <p class="desc-text">hi，你好，很高兴认识你，这是我的个人网站，你可以通过他了解我，或是找到我。你可以叫我kk或者1258，当然了，费奥德罗也可以。</p>
+
   <h2>兴趣爱好</h2>
   <div class="glass">
     <div class="tag-row">
@@ -80,10 +102,11 @@ h2{
   <h2>联系我</h2>
   <div class="glass link-grid">
     <div class="link-item">QQ：<a href="tencent://message/?uin=1993783618">1993783618</a></div>
-    <div class="link-item">B站：<a href="https://space.bilibili.com/3546725587" target="_blank">KuguaKing</a></div>
-    <div class="link-item">Steam：<a href="https://steamcommunity.com/profiles/76561199752755139/" target="_blank">KuguaKing</a></div>
+    <div class="link-item">B站：<a onclick="navigator.clipboard.writeText('https://space.bilibili.com/3546725587');alert('B站链接已复制！')" style="cursor:pointer;">费奥德罗</a><span class="tip">(点击复制链接)</span></div>
+    <div class="link-item">Steam：<a href="https://steamcommunity.com/profiles/76561199752755139/" target="_blank">苦瓜大王</a></div>
     <div class="link-item">Telegram：<a href="https://t.me/Kugua1258" target="_blank">@Kugua1258</a></div>
   </div>
 </div>
 </body>
 </html>
+

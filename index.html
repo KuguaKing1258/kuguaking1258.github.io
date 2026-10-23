@@ -15,23 +15,89 @@ body{
 .container{
   max-width:900px;
   margin:0 auto;
-}
-.title-main{
   text-align:center;
-  color:#ffffff;
-  font-size:42px;
-  margin:20px 0 16px;
-  text-shadow: 0 2px 10px #00000060;
 }
+/* 头像光环 + 圆形头像 */
+.avatar-wrap{
+  width:140px;
+  height:140px;
+  margin:0 auto 20px;
+  border-radius:50%;
+  background: linear-gradient(135deg,#b078ff,#58b8ff);
+  padding:4px;
+}
+.avatar{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background:#000000;
+}
+.main-title{
+  font-size:48px;
+  color:#fff;
+  margin-bottom:12px;
+}
+/* 文字轮播容器 */
+.slide-text-box{
+  height:28px;
+  overflow:hidden;
+  margin-bottom:30px;
+}
+.slide-text{
+  animation: textRoll 9s infinite;
+}
+.slide-text span{
+  display:block;
+  font-size:20px;
+  color:#d8d8d8;
+  line-height:28px;
+}
+@keyframes textRoll {
+  0%{transform:translateY(0);}
+  30%{transform:translateY(0);}
+  33%{transform:translateY(-28px);}
+  63%{transform:translateY(-28px);}
+  66%{transform:translateY(-56px);}
+  96%{transform:translateY(-56px);}
+  100%{transform:translateY(0);}
+}
+/* 导航按钮组 */
+.btn-group{
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:40px;
+}
+.btn{
+  padding:12px 28px;
+  border-radius:999px;
+  font-size:17px;
+  border:none;
+  cursor:pointer;
+  text-decoration:none;
+  transition:0.2s;
+}
+.btn-purple{
+  background: linear-gradient(135deg,#b078ff,#d6489c);
+  color:#fff;
+}
+.btn-outline{
+  background:transparent;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.4);
+}
+.btn:hover{
+  transform:scale(1.04);
+}
+
 .desc-text{
-  text-align:center;
   color:#e2e8f0;
   font-size:18px;
   margin-bottom:40px;
   line-height:1.7;
 }
 h2{
-  text-align:center;
   color:#ffffff;
   font-size:32px;
   margin:32px 0 16px;
@@ -69,6 +135,7 @@ h2{
   background:rgba(255,255,255,0.10);
   border-radius:14px;
   color:#ffffff;
+  text-align:left;
 }
 .link-item a{
   color:#f4b8ff;
@@ -126,20 +193,39 @@ h2{
 </head>
 <body>
 <div class="container">
-  <h1 class="title-main">你好，我是KuguaKing</h1>
+  <!-- 头像+标题+轮播词条 -->
+  <div class="avatar-wrap">
+    <div class="avatar"></div>
+  </div>
+  <h1 class="main-title">你好，我是费奥德罗</h1>
+  <div class="slide-text-box">
+    <div class="slide-text">
+      <span>生活哲学家</span>
+      <span>喜欢听音乐</span>
+      <span>娱乐爱好者</span>
+    </div>
+  </div>
+  <!-- 三个导航按钮，锚点跳转 -->
+  <div class="btn-group">
+    <a href="#hobby" class="btn btn-purple">兴趣爱好</a>
+    <a href="#contact" class="btn btn-outline">联系我</a>
+    <a href="#skill" class="btn btn-outline">我的技能</a>
+  </div>
+
   <p class="desc-text">嗨，你好，很高兴认识你，这里是我的个人网站，你可以通过它了解我或是找到我。</p>
 
-  <h2>兴趣爱好</h2>
+  <h2 id="hobby">兴趣爱好</h2>
   <div class="glass">
     <div class="tag-row">
       <span class="tag">摄影</span>
       <span class="tag">听歌</span>
       <span class="tag">MC</span>
       <span class="tag">游戏</span>
+      <span class="tag">呼呼睡大觉</span>
     </div>
   </div>
 
-  <h2>联系我</h2>
+  <h2 id="contact">联系我</h2>
   <div class="glass link-grid">
     <div class="link-item tooltip-wrap">
       邮箱：<a href="mailto:1993783618@qq.com">1993783618@qq.com</a>
@@ -159,13 +245,32 @@ h2{
         <div class="tip-btn">点击访问我的空间</div>
       </div>
     </div>
-    <div class="link-item">
+    <div class="link-item tooltip-wrap">
       Steam：<a href="https://steamcommunity.com/profiles/76561199752755139/" target="_blank">苦瓜大王</a>
+      <div class="tooltip-card">
+        <div class="tip-icon">🎮</div>
+        <div class="tip-title">Steam · 苦瓜大王</div>
+        <div class="tip-desc">有空一起联机打游戏</div>
+        <div class="tip-btn">去主页看看</div>
+      </div>
     </div>
-    <div class="link-item">
+    <div class="link-item tooltip-wrap">
       Telegram：<a href="https://t.me/Kugua1258" target="_blank">@Kugua1258</a>
+      <div class="tooltip-card">
+        <div class="tip-icon">✈️</div>
+        <div class="tip-title">TG · @Kugua1258</div>
+        <div class="tip-desc">随时可以来找我聊天</div>
+        <div class="tip-btn">打开Telegram</div>
+      </div>
     </div>
+  </div>
+
+  <!-- 预留我的技能板块，后面你自己填充内容 -->
+  <h2 id="skill">我的技能</h2>
+  <div class="glass">
+    <p style="color:#ddd;">这里暂时空白，后续你来补充技能内容</p>
   </div>
 </div>
 </body>
 </html>
+

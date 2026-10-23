@@ -44,7 +44,7 @@ h2{
   border-radius:20px;
   border:1px solid rgba(255,255,255,0.15);
   padding:26px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.35);
+  box-shadow:0 8px 24px rgba(0,0,0,0.2);
 }
 .tag-row{
   display:flex;
@@ -77,12 +77,57 @@ h2{
 .link-item a:hover{
   text-decoration: underline;
 }
+
+/* 悬浮Tooltip样式 */
+.tooltip-wrap{
+  position: relative;
+}
+.tooltip-card{
+  position: absolute;
+  left: 0;
+  top: calc(100% + 12px);
+  background: #282259;
+  color: #fff;
+  padding:18px;
+  border-radius:16px;
+  width:240px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.44);
+  opacity:0;
+  visibility:hidden;
+  transition: 0.2s ease;
+  z-index:99;
+}
+.tooltip-wrap:hover .tooltip-card{
+  opacity:1;
+  visibility:visible;
+}
+.tip-icon{
+  font-size:32px;
+  margin-bottom:8px;
+}
+.tip-title{
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+.tip-desc{
+  font-size:16px;
+  color:#ddd;
+  margin-bottom:12px;
+}
+.tip-btn{
+  background:#d6489c;
+  text-align:center;
+  padding:6px 0;
+  border-radius:999px;
+  font-size:15px;
+}
 </style>
 </head>
 <body>
 <div class="container">
   <h1 class="title-main">你好，我是KuguaKing</h1>
-  <p class="desc-text">hi，你好，很高兴认识你，这是我的个人网站，你可以通过他了解我，或是找到我。你可以叫我kk或者1258，当然了，费奥德罗也可以。</p>
+  <p class="desc-text">嗨，你好，很高兴认识你，这里是我的个人网站，你可以通过它了解我或是找到我。</p>
 
   <h2>兴趣爱好</h2>
   <div class="glass">
@@ -96,10 +141,30 @@ h2{
 
   <h2>联系我</h2>
   <div class="glass link-grid">
-    <div class="link-item">QQ：<a href="tencent://message/?uin=1993783618">1993783618</a></div>
-    <div class="link-item">B站：<a href="https://b23.tv/MNGZ1XT" target="_blank">费奥德罗</a></div>
-    <div class="link-item">Steam：<a href="https://steamcommunity.com/profiles/76561199752755139/" target="_blank">苦瓜大王</a></div>
-    <div class="link-item">Telegram：<a href="https://t.me/Kugua1258" target="_blank">@Kugua1258</a></div>
+    <div class="link-item tooltip-wrap">
+      邮箱：<a href="mailto:1993783618@qq.com">1993783618@qq.com</a>
+      <div class="tooltip-card">
+        <div class="tip-icon">✉️</div>
+        <div class="tip-title">邮箱联系</div>
+        <div class="tip-desc">1993783618@qq.com</div>
+        <div class="tip-btn">工作合作可发邮件</div>
+      </div>
+    </div>
+    <div class="link-item tooltip-wrap">
+      B站：<a href="https://b23.tv/MNGZ1XT" target="_blank">费奥德罗</a>
+      <div class="tooltip-card">
+        <div class="tip-icon">📺</div>
+        <div class="tip-title">B站 · 费奥德罗</div>
+        <div class="tip-desc">看视频、追番、整活都在这</div>
+        <div class="tip-btn">点击访问我的空间</div>
+      </div>
+    </div>
+    <div class="link-item">
+      Steam：<a href="https://steamcommunity.com/profiles/76561199752755139/" target="_blank">苦瓜大王</a>
+    </div>
+    <div class="link-item">
+      Telegram：<a href="https://t.me/Kugua1258" target="_blank">@Kugua1258</a>
+    </div>
   </div>
 </div>
 </body>

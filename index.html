@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>KuguaKing</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui, sans-serif;}
@@ -161,7 +161,7 @@ h2{
   text-decoration: underline;
 }
 
-/* 悬浮Tooltip样式 */
+/* 悬浮Tooltip样式，默认开启，手机端关闭 */
 .tooltip-wrap{
   position: relative;
 }
@@ -224,6 +224,45 @@ h2{
 }
 .footer-bar a:hover{
   text-decoration:underline;
+}
+
+/* ========== 移动端修复（屏幕小于768px生效） ========== */
+@media (max-width:768px){
+  .avatar-wrap{
+    width:130px;
+    height:130px;
+  }
+  .main-title{
+    font-size:36px;
+  }
+  .slide-text span{
+    font-size:17px;
+  }
+  .btn{
+    padding:10px 22px;
+    font-size:16px;
+  }
+  .desc-text{
+    font-size:16px;
+  }
+  h2{
+    font-size:28px;
+  }
+  .glass{
+    padding:22px;
+  }
+  /* 手机直接禁用悬浮弹窗，解决触摸bug */
+  .tooltip-card{
+    display:none !important;
+  }
+  .link-grid{
+    grid-template-columns: 1fr;
+  }
+  .footer-bar{
+    flex-direction:column;
+    gap:12px;
+    text-align:center;
+  }
 }
 </style>
 </head>

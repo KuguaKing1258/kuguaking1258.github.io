@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KuguaKing</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui, sans-serif;}
+body{
+  min-height:100vh;
+  background: url("https://picsum.photos/id/1039/1920/1080") center/cover no-repeat fixed;
+  padding:40px 20px;
+}
+.container{
+  max-width:900px;
+  margin:0 auto;
+}
+h2{
+  text-align:center;
+  color:#fff;
+  font-size:32px;
+  margin:32px 0 16px;
+  text-shadow: 0 2px 8px #0005;
+}
+.glass{
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.18);
+  padding:24px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.2);
+}
+.tag-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.tag{
+  padding:8px 16px;
+  background:rgba(255,255,255,0.15);
+  border-radius:999px;
+  color:white;
+  font-size:15px;
+}
+.link-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:14px;
+}
+.link-item{
+  padding:14px 18px;
+  background:rgba(255,255,255,0.15);
+  border-radius:12px;
+  color:white;
+}
+.link-item a{
+  color:#f8b8ff;
+  text-decoration:none;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>兴趣爱好</h2>
+  <div class="glass">
+    <div class="tag-row">
+      <span class="tag">折腾电脑</span>
+      <span class="tag">游戏</span>
+      <span class="tag">听歌</span>
+      <span class="tag">追剧</span>
+      <span class="tag">摄影</span>
+      <span class="tag">MC</span>
+    </div>
+  </div>
+
+  <h2>联系我</h2>
+  <div class="glass link-grid">
+    <div class="link-item">QQ：<a href="#">3060341283</a></div>
+    <div class="link-item">B站：<a href="https://space.bilibili.com/3546725587" target="_blank">KuguaKing</a></div>
+    <div class="link-item">Steam：<a href="https://steamcommunity.com/profiles/76561199752755139/" target="_blank">KuguaKing</a></div>
+    <div class="link-item">Telegram：<a href="https://t.me/Kugua1258" target="_blank">@Kugua1258</a></div>
+  </div>
+</div>
+</body>
+</html>

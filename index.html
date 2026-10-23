@@ -13,7 +13,6 @@ body{
   color:#fff;
 }
 
-/* 首屏头部 */
 .hero{
   min-height:100vh;
   display:flex;
@@ -24,7 +23,7 @@ body{
   text-align:center;
 }
 
-/* 头像光环 + 爱心头像 */
+/* 纯黑头像 */
 .avatar-wrap{
   width:160px;
   height:160px;
@@ -38,40 +37,6 @@ body{
   height:100%;
   border-radius:50%;
   background:#000000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-.heart{
-  width:70px;
-  height:70px;
-  position:relative;
-  transform:rotate(-45deg);
-  animation: heartBeat 1.4s ease-in-out infinite;
-}
-.heart::before,
-.heart::after{
-  content:"";
-  position:absolute;
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background: linear-gradient(135deg,#ff4d6d,#ff85a1);
-}
-.heart::before{
-  top:-35px;
-  left:0;
-}
-.heart::after{
-  top:0;
-  left:35px;
-}
-@keyframes heartBeat{
-  0%,100%{ transform:rotate(-45deg) scale(1); }
-  15%{ transform:rotate(-45deg) scale(1.14); }
-  30%{ transform:rotate(-45deg) scale(1); }
-  45%{ transform:rotate(-45deg) scale(1.14); }
-  60%{ transform:rotate(-45deg) scale(1); }
 }
 
 .main-title{
@@ -80,17 +45,21 @@ body{
   text-shadow: 0 2px 14px #00000060;
 }
 
-/* 跳动词条容器 */
 .slide-text-box{
   height:40px;
-  overflow:hidden;
   margin-bottom:24px;
   display:flex;
   justify-content:center;
   align-items:center;
+  overflow:visible;
+}
+.text-item{
+  font-size:22px;
+  color:#c7c7c7;
+  white-space:nowrap;
+  transform-origin: center;
 }
 
-/* 导航按钮组 */
 .btn-group{
   display:flex;
   gap:16px;
@@ -127,13 +96,11 @@ body{
   max-width:640px;
 }
 
-/* 下方内容区 */
 .content{
   max-width:900px;
   margin:0 auto;
   padding:80px 20px 40px;
 }
-
 h2{
   font-size:32px;
   margin:40px 0 18px;
@@ -181,7 +148,6 @@ h2{
   text-decoration: underline;
 }
 
-/* 悬浮Tooltip */
 .tooltip-wrap{
   position: relative;
 }
@@ -226,7 +192,6 @@ h2{
   font-size:15px;
 }
 
-/* ========== 底部新布局 ========== */
 .footer-bar{
   max-width:900px;
   margin:80px auto 0;
@@ -253,29 +218,16 @@ h2{
   color:#e2e8f0;
 }
 
-/* 移动端修复 */
 @media (max-width:768px){
   .avatar-wrap{
     width:130px;
     height:130px;
   }
-  .heart{
-    width:55px;
-    height:55px;
-  }
-  .heart::before,
-  .heart::after{
-    width:55px;
-    height:55px;
-  }
-  .heart::before{
-    top:-27px;
-  }
-  .heart::after{
-    left:27px;
-  }
   .main-title{
     font-size:36px;
+  }
+  .text-item{
+    font-size:18px;
   }
   .btn{
     padding:10px 22px;
@@ -303,9 +255,7 @@ h2{
 
 <section class="hero">
   <div class="avatar-wrap">
-    <div class="avatar">
-      <div class="heart"></div>
-    </div>
+    <div class="avatar"></div>
   </div>
 
   <h1 class="main-title">你好，我是费奥德罗</h1>
@@ -393,45 +343,39 @@ const wordList = ["生活哲学家", "喜欢听音乐", "娱乐爱好者"];
 const box = document.getElementById("wordBox");
 let currentIndex = 0;
 
-// 渲染单条文字：每个字从中间散开动画
-function renderText(text){
+// 黑洞喷涌 + 吸入动画
+async function playBlackHoleAnim(text){
   box.innerHTML = "";
-  const chars = text.split("");
-  chars.forEach((ch,i)=>{
-    const span = document.createElement("span");
-    span.innerText = ch;
-    span.style.display = "inline-block";
-    span.style.fontSize = "22px";
-    span.style.color = "#f4b8ff";
-    span.style.margin = "0 3px";
-    span.style.opacity = "0";
-    span.style.transform = "translateX(-16px) scale(0.6)";
-    span.style.transition = "all 0.35s ease-out";
-    box.appendChild(span);
-    // 依次延迟出现
-    setTimeout(()=>{
-      span.style.opacity = "1";
-      span.style.transform = "translateX(0) scale(1)";
-    }, i * 80);
-  })
-  // 停留一段时间后收回、切换
-  setTimeout(()=>{
-    Array.from(box.children).forEach((sp, idx)=>{
-      setTimeout(()=>{
-        sp.style.opacity = "0";
-        sp.style.transform = "translateX(16px) scale(0.6)";
-      }, idx * 60)
-    })
-    // 等全部收完，换下一句
-    setTimeout(()=>{
-      currentIndex = (currentIndex + 1) % wordList.length;
-      renderText(wordList[currentIndex]);
-    }, chars.length * 60 + 600)
-  }, 2200)
-}
-renderText(wordList[0]);
-</script>
+  const span = document.createElement("span");
+  span.className = "text-item";
+  span.innerText = text;
+  span.style.transform = "scaleX(0)";
+  span.style.opacity = "0";
+  box.appendChild(span);
 
+  // 喷涌出来（从中心向两侧拉开）
+  span.style.transition = "1.2s ease-out";
+  span.style.transform = "scaleX(1)";
+  span.style.opacity = "1";
+  await sleep(1600);
+
+  // 停留展示（黑洞吐完，静置）
+  await sleep(3000);
+
+  // 吸入，缩回中心点消失
+  span.style.transition = "1s ease-in";
+  span.style.transform = "scaleX(0)";
+  span.style.opacity = "0";
+  await sleep(1200);
+
+  // 切换下一句，循环
+  currentIndex = (currentIndex + 1) % wordList.length;
+  playBlackHoleAnim(wordList[currentIndex]);
+}
+function sleep(ms){
+  return new Promise(resolve=>setTimeout(resolve,ms));
+}
+playBlackHoleAnim(wordList[currentIndex]);
+</script>
 </body>
 </html>
-

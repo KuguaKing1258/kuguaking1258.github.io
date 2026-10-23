@@ -13,21 +13,22 @@ body{
   color:#fff;
 }
 
+/* 首屏头部 */
 .hero{
   min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  padding:60px 20px;
+  padding:40px 20px 28px;
   text-align:center;
 }
 
-/* 纯黑头像 */
+/* 头像光环 + 纯黑头像 */
 .avatar-wrap{
   width:160px;
   height:160px;
-  margin-bottom:24px;
+  margin-bottom:42px;
   border-radius:50%;
   background: linear-gradient(135deg,#b078ff,#58b8ff);
   padding:4px;
@@ -41,31 +42,37 @@ body{
 
 .main-title{
   font-size:52px;
-  margin-bottom:16px;
+  margin-bottom:22px;
   text-shadow: 0 2px 14px #00000060;
 }
 
+/* 翻页式文字容器 */
 .slide-text-box{
   height:40px;
-  margin-bottom:24px;
+  margin-bottom:34px;
   display:flex;
   justify-content:center;
   align-items:center;
-  overflow:visible;
+  perspective: 1200px;
+  overflow:hidden;
 }
-.text-item{
+.flip-word{
+  position:absolute;
   font-size:22px;
   color:#c7c7c7;
   white-space:nowrap;
-  transform-origin: center;
+  transform-origin: center bottom;
+  will-change: transform, opacity;
 }
 
+/* 导航按钮组 */
 .btn-group{
   display:flex;
   gap:16px;
   justify-content:center;
   flex-wrap:wrap;
-  margin-bottom:28px;
+  margin-bottom:auto;
+  margin-top:18px;
 }
 .btn{
   padding:12px 28px;
@@ -89,18 +96,23 @@ body{
   transform:scale(1.04);
 }
 
+/* 底部简介贴近首屏底边 */
 .desc-text{
   font-size:18px;
   color:#e2e8f0;
   line-height:1.8;
   max-width:640px;
+  margin-top:auto;
+  padding-top:18px;
 }
 
+/* 下方内容区 */
 .content{
   max-width:900px;
   margin:0 auto;
   padding:80px 20px 40px;
 }
+
 h2{
   font-size:32px;
   margin:40px 0 18px;
@@ -148,6 +160,7 @@ h2{
   text-decoration: underline;
 }
 
+/* 悬浮Tooltip */
 .tooltip-wrap{
   position: relative;
 }
@@ -192,6 +205,7 @@ h2{
   font-size:15px;
 }
 
+/* 底部布局 */
 .footer-bar{
   max-width:900px;
   margin:80px auto 0;
@@ -218,15 +232,21 @@ h2{
   color:#e2e8f0;
 }
 
+/* 移动端修复 */
 @media (max-width:768px){
+  .hero{
+    padding:30px 16px 22px;
+  }
   .avatar-wrap{
     width:130px;
     height:130px;
+    margin-bottom:30px;
   }
   .main-title{
     font-size:36px;
+    margin-bottom:18px;
   }
-  .text-item{
+  .flip-word{
     font-size:18px;
   }
   .btn{
@@ -268,7 +288,10 @@ h2{
     <a href="#hobby" class="btn btn-outline">兴趣爱好</a>
   </div>
 
-  <p class="desc-text">嗨，你好，很高兴认识你，这里是我的个人网站，你可以通过它了解我或是找到我。</p>
+  <p class="desc-text">
+    嗨，你好，很高兴认识你，这里是我的个人网站。<br>
+    你可以通过它了解我或是找到我。
+  </p>
 </section>
 
 <main class="content">
@@ -343,39 +366,53 @@ const wordList = ["生活哲学家", "喜欢听音乐", "娱乐爱好者"];
 const box = document.getElementById("wordBox");
 let currentIndex = 0;
 
-// 黑洞喷涌 + 吸入动画
-async function playBlackHoleAnim(text){
-  box.innerHTML = "";
-  const span = document.createElement("span");
-  span.className = "text-item";
-  span.innerText = text;
-  span.style.transform = "scaleX(0)";
-  span.style.opacity = "0";
-  box.appendChild(span);
-
-  // 喷涌出来（从中心向两侧拉开）
-  span.style.transition = "1.2s ease-out";
-  span.style.transform = "scaleX(1)";
-  span.style.opacity = "1";
-  await sleep(1600);
-
-  // 停留展示（黑洞吐完，静置）
-  await sleep(3000);
-
-  // 吸入，缩回中心点消失
-  span.style.transition = "1s ease-in";
-  span.style.transform = "scaleX(0)";
-  span.style.opacity = "0";
-  await sleep(1200);
-
-  // 切换下一句，循环
-  currentIndex = (currentIndex + 1) % wordList.length;
-  playBlackHoleAnim(wordList[currentIndex]);
-}
 function sleep(ms){
-  return new Promise(resolve=>setTimeout(resolve,ms));
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
-playBlackHoleAnim(wordList[currentIndex]);
+
+async function playFlipWord(){
+  box.innerHTML = "";
+
+  const current = document.createElement("span");
+  current.className = "flip-word";
+  current.innerText = wordList[currentIndex];
+  box.appendChild(current);
+
+  // 当前词向上翻走，像手心翻手背
+  current.style.transform = "rotateX(0deg)";
+  current.style.opacity = "1";
+
+  await sleep(3800);
+
+  current.style.transition = "transform 0.9s ease-in, opacity 0.7s ease-in";
+  current.style.transform = "rotateX(-180deg)";
+  current.style.opacity = "0";
+
+  await sleep(500);
+
+  // 新词从下往上翻出来
+  const nextIndex = (currentIndex + 1) % wordList.length;
+  const next = document.createElement("span");
+  next.className = "flip-word";
+  next.innerText = wordList[nextIndex];
+  next.style.transform = "rotateX(180deg)";
+  next.style.opacity = "0";
+  box.appendChild(next);
+
+  requestAnimationFrame(() => {
+    next.style.transition = "transform 0.9s ease-out, opacity 0.7s ease-out";
+    next.style.transform = "rotateX(0deg)";
+    next.style.opacity = "1";
+  });
+
+  await sleep(700);
+
+  currentIndex = nextIndex;
+  playFlipWord();
+}
+
+playFlipWord();
 </script>
+
 </body>
 </html>

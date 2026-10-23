@@ -10,18 +10,25 @@ body{
   min-height:100vh;
   background: linear-gradient(135deg, #050a1f, #0b1736, #10122e);
   background-attachment: fixed;
-  padding:40px 20px;
+  color:#fff;
 }
-.container{
-  max-width:900px;
-  margin:0 auto;
+
+/* 首屏头部：打开页面时只显示这一块 */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:60px 20px;
   text-align:center;
 }
+
 /* 头像光环 + 圆形头像 */
 .avatar-wrap{
-  width:140px;
-  height:140px;
-  margin:0 auto 20px;
+  width:160px;
+  height:160px;
+  margin-bottom:24px;
   border-radius:50%;
   background: linear-gradient(135deg,#b078ff,#58b8ff);
   padding:4px;
@@ -33,15 +40,16 @@ body{
   background:#000000;
 }
 .main-title{
-  font-size:48px;
-  color:#fff;
-  margin-bottom:12px;
+  font-size:52px;
+  margin-bottom:16px;
+  text-shadow: 0 2px 14px #00000060;
 }
+
 /* 文字轮播容器 */
 .slide-text-box{
-  height:28px;
+  height:32px;
   overflow:hidden;
-  margin-bottom:30px;
+  margin-bottom:24px;
 }
 .slide-text{
   animation: textRoll 9s infinite;
@@ -50,24 +58,25 @@ body{
   display:block;
   font-size:20px;
   color:#d8d8d8;
-  line-height:28px;
+  line-height:32px;
 }
 @keyframes textRoll {
   0%{transform:translateY(0);}
   30%{transform:translateY(0);}
-  33%{transform:translateY(-28px);}
-  63%{transform:translateY(-28px);}
-  66%{transform:translateY(-56px);}
-  96%{transform:translateY(-56px);}
+  33%{transform:translateY(-32px);}
+  63%{transform:translateY(-32px);}
+  66%{transform:translateY(-64px);}
+  96%{transform:translateY(-64px);}
   100%{transform:translateY(0);}
 }
+
 /* 导航按钮组 */
 .btn-group{
   display:flex;
   gap:16px;
   justify-content:center;
   flex-wrap:wrap;
-  margin-bottom:40px;
+  margin-bottom:28px;
 }
 .btn{
   padding:12px 28px;
@@ -92,15 +101,22 @@ body{
 }
 
 .desc-text{
-  color:#e2e8f0;
   font-size:18px;
-  margin-bottom:40px;
-  line-height:1.7;
+  color:#e2e8f0;
+  line-height:1.8;
+  max-width:640px;
 }
+
+/* 下方内容区：需要向下滚动才能看到 */
+.content{
+  max-width:900px;
+  margin:0 auto;
+  padding:80px 20px 40px;
+}
+
 h2{
-  color:#ffffff;
   font-size:32px;
-  margin:32px 0 16px;
+  margin:40px 0 18px;
   text-shadow: 0 2px 10px #00000060;
 }
 .glass{
@@ -109,8 +125,8 @@ h2{
   -webkit-backdrop-filter: blur(16px);
   border-radius:20px;
   border:1px solid rgba(255,255,255,0.15);
-  padding:26px;
-  box-shadow:0 8px 24px rgba(0,0,0,0.2);
+  padding:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
 }
 .tag-row{
   display:flex;
@@ -189,15 +205,38 @@ h2{
   border-radius:999px;
   font-size:15px;
 }
+
+/* 底部版权栏，带分隔横线 */
+.footer-bar{
+  max-width:900px;
+  margin:80px auto 0;
+  padding-top:16px;
+  border-top: 1px solid rgba(255,255,255,0.35);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:16px;
+  color:#e2e8f0;
+}
+.footer-bar a{
+  color:#f4b8ff;
+  text-decoration:none;
+}
+.footer-bar a:hover{
+  text-decoration:underline;
+}
 </style>
 </head>
 <body>
-<div class="container">
-  <!-- 头像+标题+轮播词条 -->
+
+<!-- 第一屏：头像、你好、跳转词条、按钮、简介 -->
+<section class="hero">
   <div class="avatar-wrap">
     <div class="avatar"></div>
   </div>
+
   <h1 class="main-title">你好，我是费奥德罗</h1>
+
   <div class="slide-text-box">
     <div class="slide-text">
       <span>生活哲学家</span>
@@ -205,7 +244,7 @@ h2{
       <span>娱乐爱好者</span>
     </div>
   </div>
-  <!-- 按钮顺序：联系我(紫色渐变) → 我的技能 → 兴趣爱好 -->
+
   <div class="btn-group">
     <a href="#contact" class="btn btn-purple">联系我</a>
     <a href="#skill" class="btn btn-outline">我的技能</a>
@@ -213,8 +252,11 @@ h2{
   </div>
 
   <p class="desc-text">嗨，你好，很高兴认识你，这里是我的个人网站，你可以通过它了解我或是找到我。</p>
+</section>
 
-  <!-- 页面板块顺序：兴趣爱好 → 我的技能（空白预留） → 联系我 -->
+<!-- 第二屏及以后：向下滚动查看 -->
+<main class="content">
+
   <h2 id="hobby">兴趣爱好</h2>
   <div class="glass">
     <div class="tag-row">
@@ -270,7 +312,13 @@ h2{
       </div>
     </div>
   </div>
-</div>
+
+  <!-- 底部版权栏 -->
+  <div class="footer-bar">
+    <span>© 2026 费奥德罗</span>
+    <a href="#">个人主页</a>
+  </div>
+</main>
+
 </body>
 </html>
-
